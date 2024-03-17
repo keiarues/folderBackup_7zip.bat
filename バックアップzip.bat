@@ -6,8 +6,6 @@ setlocal
 ::This batch file is created in Japanese, so please save it with sjis.
 ::
 
-::
-
 cd /d %~dp0
 
 ::日付の取得
@@ -34,12 +32,15 @@ set backupFolderName=_backup
 set sevenZipExePath="D:\Program Files\7-Zip\7z.exe"
 
 
-
 ::◆バックアップ対象のフォルダパス
 set backupFromFolder=%~dp0
 
-::◆バックアップ先のzipファイルパス
-set zipFilePath=%~dp0%backupFolderName%\%yyyymmdd-hhmmss%.zip
+::◆バッチファイルのあるフォルダ名を取得する
+for %%a in ("%CD%") do (set thisDirectory=%%~na) 
+
+
+::◆バックアップ先のzipファイルのパス
+set zipFilePath=%~dp0%backupFolderName%\%yyyymmdd-hhmmss%_%thisDirectory%.zip
 
 ::◆ログファイルのファイルパス
 set logFilePath=%~dp0\backuplog.log
@@ -48,6 +49,8 @@ set logFilePath=%~dp0\backuplog.log
 echo.
 echo ----
 echo 現在時刻: %yyyymmdd-hhmmss%
+echo バックアップフォルダ名: %thisDirectory%
+echo.
 echo バックアップ対象のフォルダパス: %backupFromFolder%
 echo バックアップ先のzipファイルパス: %zipFilePath%
 echo バックアップ除外フォルダ : %backupFolderName%
