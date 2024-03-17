@@ -1,6 +1,13 @@
 @echo off
 setlocal
 
+::
+::このバッチファイルは日本語で作成されているのでsjisで保存してね
+::This batch file is created in Japanese, so please save it with sjis.
+::
+
+::
+
 cd /d %~dp0
 
 ::日付の取得
