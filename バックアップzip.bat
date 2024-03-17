@@ -43,7 +43,7 @@ for %%a in ("%CD%") do (set thisDirectory=%%~na)
 set zipFilePath=%~dp0%backupFolderName%\%yyyymmdd-hhmmss%_%thisDirectory%.zip
 
 ::◆ログファイルのファイルパス
-set logFilePath=%~dp0\backuplog.log
+set logFilePath=%~dp0%backupFolderName%\backuplog.log
 
 
 echo.
@@ -59,11 +59,15 @@ echo ----
 echo.
 
 
+::バックアップフォルダの作成
+::フォルダを先に作成しておかないとログファイルが書き込めないので作成しておく
+mkdir "%~dp0%backupFolderName%"
+
 
 ::ログファイルの初期化
 ::ログ開始時刻の書き込み
 echo.
-echo %date% %time% >%logFilePath%
+echo %date% %time% >"%logFilePath%"
 echo.
 
 ::7-Zipコマンドラインメモ
@@ -82,7 +86,7 @@ call %sevenZipExePath% a "%zipFilePath%" "%backupFromFolder%" -xr!"%backupFolder
 
 ::ログファイル終了時刻の書き込み
 echo.
-echo %date% %time% >>%logFilePath%
+echo %date% %time% >>"%logFilePath%"
 echo.
 
 
